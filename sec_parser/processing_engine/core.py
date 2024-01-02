@@ -53,6 +53,7 @@ from sec_parser.semantic_elements.highlighted_text_element import HighlightedTex
 from sec_parser.semantic_elements.semantic_elements import (
     IrrelevantElement,
     NotYetClassifiedElement,
+    PageHeaderElement,
     TextElement,
 )
 from sec_parser.semantic_elements.table_element.table_element import TableElement
@@ -184,7 +185,6 @@ class Edgar10QParser(AbstractSemanticElementParser):
             EmptyElementClassifier(types_to_process={NotYetClassifiedElement}),
             TableClassifier(types_to_process={NotYetClassifiedElement}),
             TableOfContentsClassifier(types_to_process={TableElement}),
-            TopSectionManagerFor10Q(types_to_process={NotYetClassifiedElement}),
             IntroductorySectionElementClassifier(),
             TextClassifier(types_to_process={NotYetClassifiedElement}),
             HighlightedTextClassifier(types_to_process={TextElement}),
@@ -194,6 +194,7 @@ class Edgar10QParser(AbstractSemanticElementParser):
             PageHeaderClassifier(
                 types_to_process={TextElement, HighlightedTextElement},
             ),
+            TopSectionManagerFor10Q(types_to_exclude={PageHeaderElement}),
             PageNumberClassifier(
                 types_to_process={TextElement, HighlightedTextElement},
             ),
